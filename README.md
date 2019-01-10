@@ -4,8 +4,8 @@ This is another JavaScript To do App.
 
 To run:
 
-`clone this project and navigate to the directory\  
-run npm install\ 
+`clone this project and navigate to the directory\
+run npm install\
 run npm run build
 `
 
