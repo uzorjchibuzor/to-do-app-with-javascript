@@ -4,12 +4,17 @@ import addToDoToProject from "./addToDoToProject";
 import getTableSiblingOfParentDiv from "./getTableSiblingOfParentDiv";
 
 let content = document.querySelector("#content");
-content.className = "small-container";
+
+let title = document.createElement('h4');
+title.innerHTML = 'to-do app'
 
 let newProjectButton = document.createElement("button");
 newProjectButton.innerHTML = "New Project";
 newProjectButton.className = "btn-primary";
 newProjectButton.id = "new-project-button";
+
+
+content.appendChild(title);
 content.appendChild(newProjectButton);
 
 // New Project Event Listener
@@ -24,7 +29,7 @@ document
 
 // Event Listener That adds a todo to its project
 
-content.addEventListener("click", function(e) {
+content.addEventListener("click", (e) => {
   if (e.target && e.target.classList.contains("make-todo")) {
     addToDoToProject(getTableSiblingOfParentDiv(e.target));
   }
@@ -32,19 +37,38 @@ content.addEventListener("click", function(e) {
 
 
 // Event Listener That removes a todo from its project
-function findPositionOfElement(element){
-  let parent = element.parentNode;
-  let children = parent.childNodes;
-  let index = 0;
-  while (children[index] != element) {
-    index++;
-  }
-  return index;
-}
 
-content.addEventListener("click", function(e) {
+content.addEventListener("click", (e) => {
   if (e.target && e.target.classList.contains("btn-danger")) {
     let row = e.target.closest('tr');
     row.parentNode.removeChild(row);
   }
 });
+
+// Event Listener that removes a project
+
+content.addEventListener("click", (e) => {
+  if (e.target && e.target.classList.contains("remove-project")) {
+    let project = e.target.closest('div');
+    project.parentNode.removeChild(project);
+  }
+});
+
+// Event Listener for checkbox
+
+  content.addEventListener('change', (e) => {
+    if (e.target && e.target.classList.contains('completed-box')) {
+      if (e.target.checked) {
+         e.target.closest('tr').classList.add('text-muted');
+      } else {
+        e.target.closest('tr').classList.remove('text-muted');
+      }
+    }
+  })
+
+
+  // LocalStorage 
+
+  let itemsArray = [];
+  localStorage.setItem('items', JSON.stringify(itemsArray));
+  const data = JSON.parse(localStorage.getItem('items'));

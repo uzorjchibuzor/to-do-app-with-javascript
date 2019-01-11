@@ -1,6 +1,45 @@
 @import "~bootstrap/scss/bootstrap";
+body {
+  padding-top:34px;
 
-.small-container {
+#content{
+  text-align: center;
+  font-size: 16px;
   margin: auto;
 	width: 70%;
+  &>div.project-div {
+    margin-bottom: 30px;
+    border: 1px solid rebeccapurple;
+    padding-top: 10px;
+
+    .remove-project {
+      color: red;
+      float: right;
+      margin-right: 17px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .todo-form{
+      margin-top: 10px;
+      button{
+        margin: 10px auto;
+      }
+    }
+    input {
+      margin: 0 10px;
+    }
+  }
+  #new-project-button {
+    margin-bottom: 25px;
+  }
+
+  table {
+    text-align: center;
+  }
 }
+
+}
+

@@ -25,7 +25,7 @@ function formLoader(parentNode) {
 
   //  Start of the Title creation
 
-  const titleInput = inputMaker("text", "title", "title-input", "Enter Title");
+  const titleInput = inputMaker("text", "title", "title-input", "to-do title");
 
   parentNode.appendChild(titleInput);
 
@@ -37,7 +37,7 @@ function formLoader(parentNode) {
     "text",
     "description",
     "description-input",
-    "Enter Description"
+    "to-do description"
   );
   parentNode.appendChild(descriptionInput);
 

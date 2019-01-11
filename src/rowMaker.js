@@ -4,6 +4,7 @@ function rowMaker(todo) {
   let deleteTd = document.createElement("td");
 
   let completed = document.createElement("input");
+  completed.className="completed-box";
   completed.type = "checkbox";
 
   let deleteButton = document.createElement("button");
