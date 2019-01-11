@@ -1,32 +1,17 @@
 function formLoader(parentNode) {
-  let form = document.createElement("form");
-
   // HTML Tag Generator Functions
-  const labelMaker = (title, purpose) => {
-    let label = document.createElement("label");
-    label.purpose = purpose;
-    label.innerHTML = title;
-    return label;
-  };
 
-  const inputMaker = (type, classList, id, placeholder) => {
+  const inputMaker = (type, name, id, placeholder) => {
     let input = document.createElement("input");
+    input.required = true;
     input.placeholder = placeholder;
     input.type = type;
-    input.classList = classList;
     input.id = id;
     return input;
   };
 
-  const classDivMaker = className => {
-    let div = document.createElement("div");
-    div.className = className;
-    return div;
-  };
-
-  const mySelectMaker = (className, options) => {
+  const mySelectMaker = options => {
     let select = document.createElement("select");
-    select.className = className;
 
     for (let option of options) {
       let tag = document.createElement("option");
@@ -38,72 +23,46 @@ function formLoader(parentNode) {
 
   //  End of HTML Tag Generator Functions
 
-  //  Start of the Title Div creation
+  //  Start of the Title creation
 
-  const titleLabel = labelMaker("Title", "toDoTitle");
-  const titleInput = inputMaker(
-    "text",
-    "form-control",
-    "title-input",
-    "Enter Title"
-  );
-  const titleDiv = classDivMaker("form-group");
-  titleDiv.appendChild(titleLabel);
-  titleDiv.appendChild(titleInput);
-  form.appendChild(titleDiv);
+  const titleInput = inputMaker("text", "title", "title-input", "Enter Title");
 
-  // End of the Title Div creation
+  parentNode.appendChild(titleInput);
 
-  //  Start of the Description Div creation
+  // End of the Title  creation
 
-  const descriptionLabel = labelMaker("Description", "toDodescription");
+  //  Start of the Description creation
+
   const descriptionInput = inputMaker(
     "text",
-    "form-control",
+    "description",
     "description-input",
     "Enter Description"
   );
-  const descriptionDiv = classDivMaker("form-group");
-  descriptionDiv.appendChild(descriptionLabel);
-  descriptionDiv.appendChild(descriptionInput);
-  form.appendChild(descriptionDiv);
+  parentNode.appendChild(descriptionInput);
 
-  //  End of the Description Div creation
+  //  End of the Description  creation
 
-  //  Start of the Priority Div creation
+  //  Start of the Priority creation
 
-  const priorityLabel = labelMaker("Priority", "toDopriority");
-  const prioritySelect = mySelectMaker("form-control", [
-    "Low",
-    "Medium",
-    "High"
-  ]);
-  const priorityDiv = classDivMaker("form-group");
-  priorityDiv.appendChild(priorityLabel);
-  priorityDiv.appendChild(prioritySelect);
-  form.appendChild(priorityDiv);
+  const prioritySelect = mySelectMaker(["Low", "Medium", "High"]);
+  parentNode.appendChild(prioritySelect);
 
-  //  End of the Select Div creation
+  //  End of the Priority creation
 
-  // Start of DueDate Div creation
+  // Start of DueDate creation
 
-  const dueDateLabel = labelMaker("Due Date", "toDodueDate");
-  const dueDateInput = inputMaker("datetime-local", "form-control", "due-date");
-  const dueDateDiv = classDivMaker("form-group");
-  dueDateDiv.appendChild(dueDateLabel);
-  dueDateDiv.appendChild(dueDateInput);
-  form.appendChild(dueDateDiv);
+  const dueDateInput = inputMaker("date", "Due date", "due-date");
+  parentNode.appendChild(dueDateInput);
 
-  // End of Due Date Div
+  // End of Due Date creation
 
   const button = document.createElement("button");
-  button.className = "btn btn-primary";
-  button.id = "make-todo";
+  button.className = "btn-primary make-todo";
+  // button.id = "make-todo";
   button.innerHTML = "Create To Do";
 
-  form.appendChild(button);
-
-  parentNode.appendChild(form);
+  parentNode.appendChild(button);
 
   return parentNode;
 }

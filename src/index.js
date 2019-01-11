@@ -1,73 +1,50 @@
 import "./scss/index.scss";
-import formLoader from "./form";
-import Todo from "./todo_object";
-import rowMaker from "./rowMaker";
-import headerMaker from "./headerMaker";
+import projectDivMaker from "./projectDivMaker";
+import addToDoToProject from "./addToDoToProject";
+import getTableSiblingOfParentDiv from "./getTableSiblingOfParentDiv";
 
 let content = document.querySelector("#content");
-content.className = "container";
-let entryForm = formLoader(document.createElement("div"));
-content.appendChild(entryForm);
+content.className = "small-container";
 
-// End of Form Section
-const headers = [
-  "Title",
-  "Description",
-  "Priority",
-  "Due Date",
-  "Completed",
-  "Remove"
-];
-let todoDiv = document.createElement("div");
-let todoTable = document.createElement("table");
+let newProjectButton = document.createElement("button");
+newProjectButton.innerHTML = "New Project";
+newProjectButton.className = "btn-primary";
+newProjectButton.id = "new-project-button";
+content.appendChild(newProjectButton);
 
-todoTable.appendChild(headerMaker(headers));
-todoTable.className = "table";
+// New Project Event Listener
 
-// Click Listener That add rows of todos to table
-
-function addToTable() {
-  let title = document.getElementById("title-input"),
-    description = document.getElementById("description-input"),
-    priority = document.querySelector("select"),
-    dueDate = document.getElementById("due-date");
-
-  let todo = new Todo(
-    title.value,
-    description.value,
-    priority.value,
-    dueDate.value
-  );
-  todoTable.appendChild(rowMaker(todo));
-  console.log(destroyer);
+function newProject() {
+  content.appendChild(projectDivMaker());
 }
-
-let form = document.querySelector("form");
-
-// prevent default
-function handleForm(event) {
-  event.preventDefault();
-}
-
-form.addEventListener("submit", handleForm);
-
-// Click Listener That removes a row of todos from table
-
-let destroyer = document.querySelectorAll(".btn-danger");
-  // button.addEventListener("click", () => {
-  //   let toBeDeleted = button.closest("tr");
-  //   toBeDeleted.parentNode.remove(toBeDeleted);
-  // });
-
-  
-
-
-
 
 document
-  .getElementById("make-todo")
-  .addEventListener("click", () => addToTable());
+  .getElementById("new-project-button")
+  .addEventListener("click", () => newProject());
 
-todoDiv.appendChild(todoTable);
+// Event Listener That adds a todo to its project
 
-content.appendChild(todoDiv);
+content.addEventListener("click", function(e) {
+  if (e.target && e.target.classList.contains("make-todo")) {
+    addToDoToProject(getTableSiblingOfParentDiv(e.target));
+  }
+});
+
+
+// Event Listener That removes a todo from its project
+function findPositionOfElement(element){
+  let parent = element.parentNode;
+  let children = parent.childNodes;
+  let index = 0;
+  while (children[index] != element) {
+    index++;
+  }
+  return index;
+}
+
+content.addEventListener("click", function(e) {
+  if (e.target && e.target.classList.contains("btn-danger")) {
+    let row = e.target.closest('tr');
+    row.parentNode.removeChild(row);
+  }
+});
