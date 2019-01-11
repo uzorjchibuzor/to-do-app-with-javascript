@@ -18,10 +18,14 @@ content.appendChild(title);
 content.appendChild(newProjectButton);
 
 // New Project Event Listener
-
+let divIds = 0;
 function newProject() {
-  content.appendChild(projectDivMaker());
+  let divvy  = content.appendChild(projectDivMaker());
+  divvy.id = divIds;
+  divIds++;
 }
+
+
 
 document
   .getElementById("new-project-button")
