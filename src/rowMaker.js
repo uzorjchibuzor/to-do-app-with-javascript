@@ -8,7 +8,7 @@ function rowMaker(todo) {
   completed.type = "checkbox";
 
   let deleteButton = document.createElement("button");
-  deleteButton.className = "btn btn-danger";
+  deleteButton.className = "btn-danger";
   deleteButton.innerHTML = "Destroy";
 
   for (let prop in todo) {

@@ -73,6 +73,11 @@ content.addEventListener("click", (e) => {
 
   // LocalStorage 
 
-  let itemsArray = [];
-  localStorage.setItem('items', JSON.stringify(itemsArray));
-  const data = JSON.parse(localStorage.getItem('items'));
+  // let itemsArray = [];
+  // localStorage.setItem('items', JSON.stringify(itemsArray));
+  // const data = JSON.parse(localStorage.getItem('items'));
+
+
+  // Function that style a row of todo according to its priority
+
+ 

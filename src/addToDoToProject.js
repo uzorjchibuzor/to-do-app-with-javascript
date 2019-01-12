@@ -1,5 +1,6 @@
 import rowMaker from "./rowMaker";
 import Todo from "./todo_object";
+import colorizeRows from './colorizeRows';
 
 function addToDoToProject(parentNode) {
   let title = document.getElementById("title-input"),
@@ -22,7 +23,9 @@ function addToDoToProject(parentNode) {
   title.value = '';
   description.value = '';
   dueDate.value = '';
-  parentNode.appendChild(rowMaker(todo));
+  let row = rowMaker(todo);
+  row.classList.add(colorizeRows(row));
+  parentNode.appendChild(row); 
 }
 
 export default addToDoToProject;

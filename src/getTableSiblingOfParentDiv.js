@@ -1,6 +1,6 @@
 function getTableSiblingOfParentDiv(element) {
-  let mainProjectDiv = element.closest("div").parentNode;
-  let children = mainProjectDiv.childNodes;
+  let children = element.closest("div").parentNode.children;
+
   for (let child of children) {
     if (child.tagName == "TABLE") return child;
   }
