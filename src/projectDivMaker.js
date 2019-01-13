@@ -4,7 +4,7 @@ import headerMaker from "./headerMaker";
 function projectMaker(parentNode = document.createElement("div")) {
   let projectTitle = document.createElement('p')
   
-  projectTitle.innerHTML = prompt('Title to Project');
+  projectTitle.innerHTML = prompt('Project Title?');
   parentNode.appendChild(projectTitle);
 
   let form = formLoader(document.createElement("div"));

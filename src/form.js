@@ -6,6 +6,7 @@ function formLoader(parentNode) {
     input.required = true;
     input.placeholder = placeholder;
     input.type = type;
+    input.name = name;
     input.id = id;
     return input;
   };
@@ -59,7 +60,7 @@ function formLoader(parentNode) {
 
   const button = document.createElement("button");
   button.className = "btn-primary make-todo";
-  // button.id = "make-todo";
+
   button.innerHTML = "Create To Do";
 
   parentNode.appendChild(button);

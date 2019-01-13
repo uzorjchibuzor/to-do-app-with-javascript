@@ -2,7 +2,6 @@ import "./scss/index.scss";
 import projectDivMaker from "./projectDivMaker";
 import addToDoToProject from "./addToDoToProject";
 import getTableSiblingOfParentDiv from "./getTableSiblingOfParentDiv";
-import { builtinModules } from "module";
 
 let content = document.querySelector("#content");
 
@@ -14,29 +13,28 @@ newProjectButton.innerHTML = "New Project";
 newProjectButton.className = "btn-primary";
 newProjectButton.id = "new-project-button";
 
-let removeAllButton = document.createElement('button');
-removeAllButton.className = 'btn-danger remove-all'
-builtinModules.innerHTML = 'Remove All Projects';
-
-
+let removeAllButton = document.createElement("button");
+removeAllButton.className = "btn-danger remove-all";
+removeAllButton.innerHTML = "Remove All Projects";
 
 content.appendChild(title);
 content.appendChild(newProjectButton);
+content.appendChild(removeAllButton);
 
-let divsArray = localStorage.getItem('divs') ? JSON.parse(localStorage.getItem('divs')) : [];
+let divsArray = localStorage.getItem("divs")
+  ? JSON.parse(localStorage.getItem("divs"))
+  : [];
 
-localStorage.setItem('divs', JSON.stringify(divsArray));
-const data = JSON.parse(localStorage.getItem('divs'));
+localStorage.setItem("divs", JSON.stringify(divsArray));
+const data = JSON.parse(localStorage.getItem("divs"));
 
 for (let item of data) {
-  let newDiv = document.createElement('div');
-  newDiv.classList.add('project-div');
+  let newDiv = document.createElement("div");
+  newDiv.classList.add("project-div");
   newDiv.innerHTML = item;
   newDiv.id = data.indexOf(item);
-  content.appendChild(newDiv)
+  content.appendChild(newDiv);
 }
-
-
 
 // New Project Event Listener
 let divIds = 0;
@@ -45,14 +43,12 @@ function newProject() {
   let divvy = content.appendChild(projectDivMaker());
   divvy.id = divIds;
   divIds++;
-  
+
   // LocalStorage
 
   divsArray.push(divvy.innerHTML);
-  localStorage.setItem('divs', JSON.stringify(divsArray));
-
-};
-
+  localStorage.setItem("divs", JSON.stringify(divsArray));
+}
 
 document
   .getElementById("new-project-button")
@@ -69,7 +65,7 @@ content.addEventListener("click", e => {
 // Event Listener That removes a todo from its project
 
 content.addEventListener("click", e => {
-  if (e.target && e.target.classList.contains("btn-danger")) {
+  if (e.target && e.target.classList.contains("remove-todo")) {
     let row = e.target.closest("tr");
     row.parentNode.removeChild(row);
   }
@@ -78,14 +74,28 @@ content.addEventListener("click", e => {
 // Event Listener that removes a project
 
 content.addEventListener("click", e => {
+  
   if (e.target && e.target.classList.contains("remove-project")) {
     let project = e.target.closest("div");
-    // console.log(divsArray.indexOf(project));
-    project.parentNode.removeChild(project);
+    let children = project.parentNode.children;
+    let index = 0;
+
+  for (let child of children) {
+   
+    if (child == project) {
+      break;
+    }
+    index++;
   }
+    divsArray.splice(index - 3, 1);
+    localStorage.setItem("divs", JSON.stringify(divsArray));
+    project.parentNode.removeChild(project);
+  
+}
+    
 });
 
-// Event Listener for checkbox
+// Event Listener for Completed checkbox
 
 content.addEventListener("change", e => {
   if (e.target && e.target.classList.contains("completed-box")) {
@@ -93,6 +103,18 @@ content.addEventListener("change", e => {
       e.target.closest("tr").classList.add("text-muted");
     } else {
       e.target.closest("tr").classList.remove("text-muted");
+    }
+  }
+});
+
+// Event Listener that removes all projects and todos
+
+content.addEventListener("click", e => {
+  if (e.target && e.target.classList.contains("remove-all")) {
+    localStorage.clear();
+    let projects = document.querySelectorAll(".project-div");
+    for (let project of projects) {
+      content.removeChild(project);
     }
   }
 });
