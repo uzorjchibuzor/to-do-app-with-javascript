@@ -2,6 +2,7 @@ import "./scss/index.scss";
 import projectDivMaker from "./projectDivMaker";
 import addToDoToProject from "./addToDoToProject";
 import getTableSiblingOfParentDiv from "./getTableSiblingOfParentDiv";
+import { builtinModules } from "module";
 
 let content = document.querySelector("#content");
 
@@ -12,6 +13,10 @@ let newProjectButton = document.createElement("button");
 newProjectButton.innerHTML = "New Project";
 newProjectButton.className = "btn-primary";
 newProjectButton.id = "new-project-button";
+
+let removeAllButton = document.createElement('button');
+removeAllButton.className = 'btn-danger remove-all'
+builtinModules.innerHTML = 'Remove All Projects';
 
 
 
