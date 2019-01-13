@@ -11,6 +11,9 @@ body {
     margin-bottom: 30px;
     border: 1px solid rebeccapurple;
     padding-top: 10px;
+    p {
+      display: inline-block;
+    }
 
     .remove-project {
       color: red;
