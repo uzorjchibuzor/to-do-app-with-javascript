@@ -1,54 +1,58 @@
 @import "~bootstrap/scss/bootstrap";
 body {
-  padding-top:34px;
+  padding-top: 34px;
 
-#content{
-  text-align: center;
-  font-size: 10px;
-  margin: auto;
-  width: 80%;
-      
-  button {
-    margin: 0 10px;
-  }
+  #content {
+    text-align: center;
+    font-size: 10px;
+    margin: auto;
+    width: 80%;
 
-  &>div.project-div {
-    margin-bottom: 30px;
-    border: 1px solid rebeccapurple;
-    padding-top: 10px;
-
-    p {
-      display: inline-block;
-    }
-
-    .remove-project {
-      color: red;
-      float: right;
-      margin-right: 17px;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .todo-form{
-      margin-top: 10px;
-      button{
-        margin: 10px auto;
-      }
-    }
-    input {
+    button {
       margin: 0 10px;
     }
-  }
-  #new-project-button {
-    margin-bottom: 25px;
-  }
 
-  table {
-    text-align: center;
+    & > div.project-div {
+      margin-bottom: 30px;
+      border: 1px solid rebeccapurple;
+      padding-top: 10px;
+
+      .project-name, .edit-project-name {
+        float: left;
+      }
+
+      p {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .remove-project {
+        color: red;
+        float: right;
+        margin-right: 17px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .todo-form {
+        margin-top: 10px;
+        button {
+          margin: 10px auto;
+        }
+      }
+      input {
+        margin: 0 10px;
+      }
+    }
+    #new-project-button {
+      margin-bottom: 25px;
+    }
+
+    table {
+      text-align: center;
+    }
   }
 }
-
-}
-

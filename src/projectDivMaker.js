@@ -1,7 +1,21 @@
 import formLoader from "./form";
 import headerMaker from "./headerMaker";
 
+
 function projectMaker(parentNode = document.createElement("div")) {
+
+  let input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'project-name';
+  input.placeholder = 'Change Project Name'
+  parentNode.appendChild(input);
+
+  let button = document.createElement('button');
+  button.className = 'btn-info edit-project-name';
+  button.innerHTML = 'Change';
+  parentNode.appendChild(button);
+
+  
   let projectTitle = document.createElement('p')
   
   projectTitle.innerHTML = prompt('Project Title?');

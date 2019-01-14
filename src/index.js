@@ -2,7 +2,7 @@ import "./scss/index.scss";
 import projectDivMaker from "./projectDivMaker";
 import addToDoToProject from "./addToDoToProject";
 import getTableSiblingOfParentDiv from "./getTableSiblingOfParentDiv";
-// import loadLocalStorage from './loadLocalStorage';
+
 
 let content = document.querySelector("#content");
 
@@ -150,3 +150,35 @@ content.addEventListener("click", e => {
     }
   }
 });
+
+// Event Listener that renames a Project 
+
+content.addEventListener('click', (e) => {
+  if (e.target && e.target.classList.contains("edit-project-name")) {
+    let input = e.target.parentNode.querySelector('.project-name');
+    
+    if (!input.value) {
+      alert('Enter Valid Project Name');
+      throw new Error('Invalid Project Name');
+    }
+    
+    let index = 0;
+    let project = e.target.closest('div');
+
+    let children = content.children;
+
+    for (let child of children) {
+      if (child == project) {
+        break;
+      }
+      index++;
+    }
+
+    e.target.parentNode.children[2].innerHTML = input.value;   // the P tag holding the Name of the project is the third childNode of the project-div.
+    input.value = '';
+    divsArray[index - 3] = children[index].innerHTML; //Updating Local Storage
+    localStorage.setItem("divs", JSON.stringify(divsArray));
+
+
+  }
+})
