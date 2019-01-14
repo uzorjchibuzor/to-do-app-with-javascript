@@ -3,10 +3,18 @@ import Todo from "./todo_object";
 import colorizeRows from './colorizeRows';
 
 function addToDoToProject(parentNode) {
-  let title = document.getElementById("title-input"),
-    description = document.getElementById("description-input"),
-    priority = document.querySelector("select"),
-    dueDate = document.getElementById("due-date");
+  let project = parentNode.closest('div');
+  let title = project.querySelector("#title-input"),
+    description = project.querySelector("#description-input"),
+    priority = project.querySelector("select"),
+    dueDate = project.querySelector("#due-date");
+
+    [title, description, dueDate].forEach(input => {
+      if (!input.value) {
+        alert("Please enter all values");
+        throw new Error('Enter a Value for all of the inputs');
+      }
+    });
   
 
   let todo = new Todo(
