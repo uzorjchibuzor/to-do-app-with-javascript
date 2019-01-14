@@ -2,6 +2,7 @@ import "./scss/index.scss";
 import projectDivMaker from "./projectDivMaker";
 import addToDoToProject from "./addToDoToProject";
 import getTableSiblingOfParentDiv from "./getTableSiblingOfParentDiv";
+// import loadLocalStorage from './loadLocalStorage';
 
 let content = document.querySelector("#content");
 
@@ -21,6 +22,8 @@ content.appendChild(title);
 content.appendChild(newProjectButton);
 content.appendChild(removeAllButton);
 
+// LocalStorage
+
 let divsArray = localStorage.getItem("divs")
   ? JSON.parse(localStorage.getItem("divs"))
   : [];
@@ -37,6 +40,7 @@ for (let item of data) {
 }
 
 // New Project Event Listener
+
 let divIds = 0;
 
 function newProject() {
@@ -57,9 +61,28 @@ document
 // Event Listener That adds a todo to its project
 
 content.addEventListener("click", e => {
+  let index = 0;
   if (e.target && e.target.classList.contains("make-todo")) {
-    addToDoToProject(getTableSiblingOfParentDiv(e.target));
-  }
+    // get project Div
+
+    let project = e.target.parentNode.parentNode
+
+    let children = content.children;
+
+    for (let child of children) {
+   
+      if (child == project) {
+        break;
+      }
+      index++;
+    }
+      
+      addToDoToProject(getTableSiblingOfParentDiv(e.target));
+
+      divsArray[index - 3] = children[index].innerHTML;
+      localStorage.setItem("divs", JSON.stringify(divsArray));
+
+ }
 });
 
 // Event Listener That removes a todo from its project

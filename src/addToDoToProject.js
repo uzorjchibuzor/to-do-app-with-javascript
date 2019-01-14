@@ -7,12 +7,7 @@ function addToDoToProject(parentNode) {
     description = document.getElementById("description-input"),
     priority = document.querySelector("select"),
     dueDate = document.getElementById("due-date");
-  [title, description, dueDate].forEach(input => {
-    if (!input.value) {
-      alert("Please enter all values");
-      throw new Error(`Please enter all values`);
-    }
-  });
+  
 
   let todo = new Todo(
     title.value,
@@ -25,7 +20,7 @@ function addToDoToProject(parentNode) {
   dueDate.value = '';
   let row = rowMaker(todo);
   row.classList.add(colorizeRows(row));
-  parentNode.appendChild(row); 
+  parentNode.appendChild(row);
 }
 
 export default addToDoToProject;
